@@ -7,4 +7,5 @@ add_executable(task_manager
     src/app/main.cpp
     src/core/task.cpp
     src/core/task_manager.cpp
+    src/core/execution_engine.cpp
 )

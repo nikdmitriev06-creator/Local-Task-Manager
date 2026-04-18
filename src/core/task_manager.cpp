@@ -1,4 +1,6 @@
+#pragma once
 #include "task_manager.h"
+
 
 std::string taskManager::statusToText(taskStatus status)
 {
@@ -33,6 +35,7 @@ void taskManager::createTask(std::string type, std::string payload)
     task.type = type;
     task.status = taskStatus::Created;
     tasks[next_id] = task;
+    tasksQueue.push(next_id);
     next_id++;
 }
 
@@ -42,6 +45,21 @@ std::string *taskManager::getType(int id)
     {
         return &tasks[id].type;
     } else return nullptr;
+}
+
+int taskManager::getQueueSize()
+{
+    return tasksQueue.size();
+}
+
+int taskManager::getIdFromQueue()
+{
+    return tasksQueue.front();
+}
+
+void taskManager::PopIdOfQueue()
+{
+    tasksQueue.pop();
 }
 
 Task *taskManager::getTask(int id)

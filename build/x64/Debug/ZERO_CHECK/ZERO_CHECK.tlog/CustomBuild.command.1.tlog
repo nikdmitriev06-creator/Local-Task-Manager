@@ -1,0 +1,10 @@
+^C:\USERS\GENOS\SOURCE\REPOS\LOCAL TASK MANAGER\BUILD\CMAKEFILES\E9BC340E6C8AF2F34A77E6F80E85BF45\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/genos/source/repos/Local Task Manager" "-BC:/Users/genos/source/repos/Local Task Manager/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/genos/source/repos/Local Task Manager/build/TaskManager.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

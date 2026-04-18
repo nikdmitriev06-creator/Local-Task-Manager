@@ -1,14 +1,16 @@
 #include "../core/task.h"
+#include "../core/execution_engine.h"
 #include <iostream>
 
 int main() {
-    Task t;
-    t.id = 1;
-    t.type = "print";
-    t.payload = "Hello";
-    t.status = taskStatus::Running;
 
-    std::cout << "Task created with id: " << t.id << "\n";
+    taskManager tasksManager;
+    tasksManager.createTask("print", "Hello");
+
+    while(tasksManager.getQueueSize() != 0){
+        runTask(tasksManager.getTask(tasksManager.getIdFromQueue()));
+        tasksManager.PopIdOfQueue();
+    }
 
     return 0;
 }
