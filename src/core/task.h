@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-enum class taskStatus
+enum class TaskStatus
 {
     Created,
     Running,
@@ -14,5 +14,5 @@ struct Task
     int id;
     std::string type;
     std::string payload;
-    taskStatus status;
+    TaskStatus status;
 };

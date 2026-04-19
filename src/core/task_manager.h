@@ -3,31 +3,27 @@
 #include "task.h"
 #include <iostream>
 #include <queue>
+#include "execution_engine.h"
 
-
-class taskManager
+class TaskManager
 {
     std::unordered_map<int, Task> tasks;
     int next_id = 0;
-    std::queue<int> tasksQueue;
+    std::queue<int> TasksQueue;
 
-    std::string statusToText(taskStatus status);
+    std::string StatusToText(TaskStatus status);
 
 public:
 
-    taskManager();
+    TaskManager();
 
-    void createTask(std::string type, std::string payload);
+    void CreateTask(std::string type, std::string payload);
 
-    std::string* getType(int id);
-
-    int getQueueSize();
-    int getIdFromQueue();
+    int GetQueueSize();
+    int GetIdFromQueue();
     void PopIdOfQueue();
 
-    Task *getTask(int id);
+    Task *GetTask(int id);
 
-
-
-    void listTasks();
+    void ListTasks();
 };

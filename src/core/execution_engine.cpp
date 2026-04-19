@@ -1,32 +1,49 @@
-#pragma once
 #include "execution_engine.h"
 
-void runTask(Task* currTask)
+void TaskRunner::RunTask_print(Task* CurrTask)
 {
-    currTask->status = taskStatus::Running;
+    std::cout << CurrTask->payload;
+}
 
-    if(currTask->type == "print")
-    {
-        std::cout << currTask->payload;
-        currTask->status = taskStatus::Done;
-    } 
-    else if(currTask->type == "sleep")
-    {
-        int timeSleep;
+bool TaskRunner::RunTask_sleep(Task *CurrTask)
+{
+     int TimeSleep;
         try
         {
-            timeSleep = std::stoi(currTask->payload);
+            TimeSleep = std::stoi(CurrTask->payload);
         } 
         catch (std::invalid_argument)
         {
-            currTask->status = taskStatus::Failed;
             std::cerr << "not an integer";
-            return;
+            return false;
         }
-        std::this_thread::sleep_for(std::chrono::seconds(timeSleep));
-        currTask->status = taskStatus::Done;
-    } else 
+        std::this_thread::sleep_for(std::chrono::seconds(TimeSleep));
+        return true;
+}
+
+void TaskRunner::RunTask_fail(Task *CurrTask)
+{
+    CurrTask->status = TaskStatus::Failed;
+}
+
+void TaskRunner::RunTask(Task *CurrTask)
+{
+    std::cout << "[Task " << CurrTask->id << "] started\n";
+    CurrTask->status = TaskStatus::Running;
+
+    if(CurrTask->type == "print")
     {
-        currTask->status = taskStatus::Failed;
+        RunTask_print(CurrTask);
+        CurrTask->status = TaskStatus::Done;
+    } else if(CurrTask->type == "sleep")
+    {
+        if(RunTask_sleep(CurrTask))
+        {
+        CurrTask->status = TaskStatus::Done;
+        } else CurrTask->status = TaskStatus::Failed;
+    } else
+    {
+        RunTask_fail(CurrTask);
     }
+    std::cout << "[Task " << CurrTask->id << "] done\n";
 }

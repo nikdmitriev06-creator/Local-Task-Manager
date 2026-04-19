@@ -1,68 +1,59 @@
-#pragma once
 #include "task_manager.h"
 
 
-std::string taskManager::statusToText(taskStatus status)
+std::string TaskManager::StatusToText(TaskStatus status)
 {
     switch (status)
     {
-    case taskStatus::Created :
+    case TaskStatus::Created :
         return "Created";
 
-    case taskStatus::Done :
+    case TaskStatus::Done :
         return "Done";
 
-    case taskStatus::Running :
+    case TaskStatus::Running :
         return "Running";
 
-    case taskStatus::Failed:
+    case TaskStatus::Failed:
         return "Failed";
     default:
         return "Unknown";
     }
 }
 
-taskManager::taskManager()
+TaskManager::TaskManager()
 {
 
 }
 
-void taskManager::createTask(std::string type, std::string payload)
+void TaskManager::CreateTask(std::string type, std::string payload)
 {
     Task task;
     task.id = next_id;
     task.payload = payload;
     task.type = type;
-    task.status = taskStatus::Created;
+    task.status = TaskStatus::Created;
     tasks[next_id] = task;
-    tasksQueue.push(next_id);
+    TasksQueue.push(next_id);
     next_id++;
 }
 
-std::string *taskManager::getType(int id)
+int TaskManager::GetQueueSize()
 {
-    if(tasks.find(id) != tasks.end())
-    {
-        return &tasks[id].type;
-    } else return nullptr;
+    return TasksQueue.size();
 }
 
-int taskManager::getQueueSize()
+int TaskManager::GetIdFromQueue()
 {
-    return tasksQueue.size();
+    return TasksQueue.front();
 }
 
-int taskManager::getIdFromQueue()
+void TaskManager::PopIdOfQueue()
 {
-    return tasksQueue.front();
+    TasksQueue.pop();
 }
 
-void taskManager::PopIdOfQueue()
-{
-    tasksQueue.pop();
-}
-
-Task *taskManager::getTask(int id)
+Task *TaskManager::GetTask(int id)
 {
     if(tasks.find(id) != tasks.end())
     {
@@ -70,7 +61,7 @@ Task *taskManager::getTask(int id)
     } else return nullptr;
 }
 
-void taskManager::listTasks()
+void TaskManager::ListTasks()
 {
     for(const auto& pairs : tasks)
     {
@@ -78,6 +69,6 @@ void taskManager::listTasks()
         std::cout << "task id: " << task.id;
         std::cout << "\ntask type: " << task.type;
         std::cout << "\ntask payload: " << task.payload;
-        std::cout << "\ntask status: " << statusToText(task.status);
+        std::cout << "\ntask status: " << StatusToText(task.status);
     }
 }
