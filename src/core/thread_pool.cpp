@@ -5,7 +5,7 @@ ThreadPool::ThreadPool(int num_threads)
     TasksThread.reserve(num_threads);
     for(size_t i = 0; i < num_threads;++i)
     {
-        TasksThread.emplace_back(&worker, this);
+        TasksThread.emplace_back(&ThreadPool::worker, this);
     }
 }
 

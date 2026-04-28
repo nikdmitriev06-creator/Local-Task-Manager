@@ -28,7 +28,7 @@ void TaskRunner::RunTask_fail(Task *CurrTask)
 
 void TaskRunner::RunTask(Task *CurrTask)
 {
-    std::cout << "[Task " << CurrTask->id << "] started\n";
+    std::cout << "\n[Task " << CurrTask->id << "] started\n";
     CurrTask->status = TaskStatus::Running;
 
     if(CurrTask->type == "print")

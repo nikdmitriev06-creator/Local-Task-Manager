@@ -7,9 +7,9 @@ int main() {
 
     TaskManager manager(4);
 
-    manager.CreateTask("sleep", "1000");
+    manager.CreateTask("sleep", "100");
     manager.CreateTask("print", "Hello\n");
-    manager.CreateTask("sleep", "1000");
+    manager.CreateTask("sleep", "10");
 
     std::cout << "enter any symbol to start";
     std::cin.get();
