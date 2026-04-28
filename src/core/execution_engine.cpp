@@ -45,5 +45,5 @@ void TaskRunner::RunTask(Task *CurrTask)
     {
         RunTask_fail(CurrTask);
     }
-    std::cout << "[Task " << CurrTask->id << "] done\n";
+    std::cout << "\n[Task " << CurrTask->id << "] done\n";
 }

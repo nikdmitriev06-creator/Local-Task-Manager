@@ -21,7 +21,7 @@ std::string TaskManager::StatusToText(TaskStatus status)
     }
 }
 
-TaskManager::TaskManager()
+TaskManager::TaskManager(size_t ThreadsNum) : pool(ThreadsNum)
 {
 
 }
@@ -36,6 +36,24 @@ void TaskManager::CreateTask(std::string type, std::string payload)
     tasks[next_id] = task;
     TasksQueue.push(next_id);
     next_id++;
+
+    
+}
+
+void TaskManager::start()
+{
+    
+    while(TasksQueue.size())
+    {
+        int id = TasksQueue.front();
+        TasksQueue.pop();
+
+        pool.EnqueueTask([this, id] () {
+            TaskRunner runner;
+            runner.RunTask(GetTask(id));
+        });
+    }
+    
 }
 
 int TaskManager::GetQueueSize()

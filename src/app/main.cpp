@@ -5,14 +5,10 @@
 
 int main() {
 
-    TaskManager tasksManager;
-    TaskRunner Runner;
-    tasksManager.CreateTask("print", "Hello");
+    TaskManager manager(4);
 
-    while(tasksManager.GetQueueSize() != 0){
-        Runner.RunTask(tasksManager.GetTask(tasksManager.GetIdFromQueue()));
-        tasksManager.PopIdOfQueue();
-    }
+    manager.CreateTask("print", "Hello\n");
+    manager.CreateTask("sleep", "1000");
 
-    return 0;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
 }

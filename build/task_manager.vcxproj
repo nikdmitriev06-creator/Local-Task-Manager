@@ -364,6 +364,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\genos\source\repos\Local Task Manager\src\core\task.cpp" />
     <ClCompile Include="C:\Users\genos\source\repos\Local Task Manager\src\core\task_manager.cpp" />
     <ClCompile Include="C:\Users\genos\source\repos\Local Task Manager\src\core\execution_engine.cpp" />
+    <ClCompile Include="C:\Users\genos\source\repos\Local Task Manager\src\core\thread_pool.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
