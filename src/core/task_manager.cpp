@@ -1,7 +1,7 @@
 #include "task_manager.h"
 
 
-std::string TaskManager::StatusToText(TaskStatus status)
+std::string TaskManager::StatusToText(TaskStatus status) 
 {
     switch (status)
     {
@@ -21,7 +21,7 @@ std::string TaskManager::StatusToText(TaskStatus status)
     }
 }
 
-TaskManager::TaskManager(size_t ThreadsNum) : pool(ThreadsNum)
+TaskManager::TaskManager(size_t ThreadsNum) : pool(ThreadsNum), ThreadsNum(ThreadsNum)
 {
 
 }
@@ -84,9 +84,10 @@ void TaskManager::ListTasks()
     for(const auto& pairs : tasks)
     {
         const Task& task = pairs.second;
-        std::cout << "task id: " << task.id;
-        std::cout << "\ntask type: " << task.type;
-        std::cout << "\ntask payload: " << task.payload;
-        std::cout << "\ntask status: " << StatusToText(task.status);
+        std::cout << std::endl;
+        std::cout << "task id: " << task.id << std::endl;
+        std::cout << "task type: " << task.type << std::endl;
+        std::cout << "task payload: " << task.payload << std::endl;
+        std::cout << "task status: " << StatusToText(task.status) << std::endl;
     }
 }

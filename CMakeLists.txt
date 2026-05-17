@@ -9,4 +9,5 @@ add_executable(task_manager
     src/core/task_manager.cpp
     src/core/execution_engine.cpp
     src/core/thread_pool.cpp
+    src/core/menu.cpp
 )

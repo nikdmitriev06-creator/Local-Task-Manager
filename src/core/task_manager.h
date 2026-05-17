@@ -13,6 +13,7 @@ class TaskManager
     std::queue<int> TasksQueue;
     ThreadPool pool;
     bool Started = false;
+    size_t ThreadsNum;
 
     std::string StatusToText(TaskStatus status);
 
